@@ -1,7 +1,7 @@
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 
-## BoilerPLate
+## BoilerPlate
 
 This boilerplate contain the required configurations to get yup and running with a Laravel/Vue project with Docker.
 
@@ -28,10 +28,17 @@ You can now enter the following commands (the build command is only needed the f
 ```
 docker-compose up --build
 ```
-You will need to rebuild the containers if you add a package
 Before accessing the project you need to enter the app container
 ```
 docker-compose exec bash
+```
+Install composer dependencies
+```
+composer install
+```
+Install npm dependencies using yarn
+```
+yarn install
 ```
 Then produce a mix manifest for vue
 ```
