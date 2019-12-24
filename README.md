@@ -27,6 +27,9 @@ You can now enter the following commands (the build flag is only needed the firs
 ```
 docker-compose up --build
 ```
+
+:warning: Either install new dependencies inside the app container or if you install from host rebuilt the containers :warning:  
+
 Before accessing the project you need to enter the app container
 ```
 docker-compose exec bash
