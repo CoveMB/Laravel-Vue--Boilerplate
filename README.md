@@ -15,9 +15,9 @@ Clone the repository
 ```sh
 git clone https://github.com/cominityio/DockerLaravelBoilerplate.git
 ```
-Create a new .env file similar to .env.example
-Choose your databse name / user name / password (there will be share in all your containers)
-Add the following (note that the host is referenced as db, it will be used by Docker to establish the connection)
+Create a new .env file similar to .env.example  
+Choose your databse name / user name / password (there will be share in all your containers)  
+Add the following (notice that the host is referenced as db, it will be used by Docker to establish the connection)
 ```
 DB_CONNECTION=mysql
 DB_HOST=db
