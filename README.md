@@ -33,7 +33,7 @@ docker-compose up --build
 
 Before accessing the project you need to enter the app container
 ```
-docker-compose exec bash
+docker-compose exec app bash
 ```
 Install composer dependencies
 ```
@@ -49,17 +49,18 @@ to do so run the following commands (notice that we don't need the --build flag 
 docker-compose down
 docker-compose up
 ```
-Then produce a mix manifest for Vue using Yarn
+Then open bash into the app container again and produce a mix manifest for Vue using Yarn
 ```
+docker-compose exec app bash
 yarn dev
 ```
 You can now run the watch command that will enable hot reloading
 ```
 yarn watch
 ```
-You can acces the project at http://localhost:8080  
+You can now acces the project at http://localhost:8080  
 
-You can acces phpmyadmin at http://localhost:80  
+You can also acces phpmyadmin at http://localhost:80  
 
 To shutdown the containers run
 ```
