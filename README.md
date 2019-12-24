@@ -23,10 +23,6 @@ DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
 ```
-Generate a new key for your app using:
-```sh
-php artisan key:generate
-```
 You can now enter the following commands (the build command is only needed the first time or when you install a new package)
 ```
 docker-compose up --build
@@ -34,6 +30,10 @@ docker-compose up --build
 Before accessing the project you need to enter the app container
 ```
 docker-compose exec bash
+```
+Generate a new key for your app
+```sh
+php artisan key:generate
 ```
 Install composer dependencies
 ```
