@@ -53,29 +53,29 @@ yarn watch
 ```
 You can acces the project at http://localhost:8080  
 You can acces phpmyadmin at http://localhost:80  
-To shutdown the containers use
+To shutdown the containers run
 ```
 docker-compose down
 ```
-At the end of the project, to clean your system of all containers or db volumes use
+At the end of the project, to clean your system of all containers or db volumes run
 ```
 docker system prune -a
 ```
 
 ## Debuging
 
-To enter in the app container use
+To enter in the app container run
 ```
 docker-compose exec bash
 ```
-If you already have mysql or apache running in your computer you'll need to free the ports, run:
+If you already have mysql or apache running in your computer you'll need to free the ports, run
 ```
 sudo systemctl stop mysql
 ```
 ```
 sudo /etc/init.d/apache2 stop
 ```
-If you are missing privileges you can use
+If you are missing privileges you can run
 ```
 sudo chown -R $USER:$USER ~/path/to/project
 ```
