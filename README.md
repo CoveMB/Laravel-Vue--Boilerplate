@@ -43,7 +43,7 @@ Install npm dependencies using yarn
 ```
 yarn install
 ```
-Then produce a mix manifest for vue
+Then produce a mix manifest for Vue
 ```
 yarn dev
 ```
