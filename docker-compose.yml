@@ -20,6 +20,7 @@ services:
     working_dir: /var/www
     volumes:
       - /var/www/node_modules
+      - /var/www/vendor
       - ./:/var/www
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     ports:

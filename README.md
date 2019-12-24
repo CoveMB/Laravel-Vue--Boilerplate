@@ -23,6 +23,9 @@ Add the following (notice that the host is referenced as db, it will be used by 
 DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
+DB_DATABASE=your_db_name
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_db_password
 ```
 You can now enter the following commands (the build flag is only needed the first time or when you install a new dependency)
 ```
@@ -34,10 +37,6 @@ docker-compose up --build
 Before accessing the project you need to enter the app container
 ```
 docker-compose exec app bash
-```
-Install composer dependencies
-```
-composer install
 ```
 Generate a new key for your app
 ```
