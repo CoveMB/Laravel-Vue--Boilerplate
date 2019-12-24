@@ -1,15 +1,15 @@
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 
-## BoilerPlate
+## Project
 
-This boilerplate contain the required configurations to get yup and running with a Laravel/Vue project with Docker.
+This project contain the required configurations to get up and running with a Laravel/Vue inside Docker containers.
 
 ## Prerequisites
 
 Having Docker and Docker-compose on your machine.
 
-## Steps
+## Prepare environement
 
 Clone the repository
 ```sh
