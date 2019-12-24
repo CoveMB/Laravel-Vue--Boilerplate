@@ -13,7 +13,7 @@ Having Docker and Docker-compose on your machine.
 
 Clone the repository
 ```sh
-git clone https://github.com/cominityio/DockerLaravelBoilerplate.git
+git clone Organization_name/Repository#
 ```
 Create a new .env file similar to .env.example  
 Choose your databse name / user name / password (there will be share in all your containers)  
