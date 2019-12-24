@@ -23,7 +23,7 @@ DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
 ```
-You can now enter the following commands (the build command is only needed the first time or when you install a new package)
+You can now enter the following commands (the build flag is only needed the first time or when you install a new dependency)
 ```
 docker-compose up --build
 ```
@@ -39,11 +39,7 @@ Generate a new key for your app
 ```sh
 php artisan key:generate
 ```
-Install npm dependencies using yarn
-```
-yarn install
-```
-Then produce a mix manifest for Vue
+Then produce a mix manifest for Vue using Yarn
 ```
 yarn dev
 ```
