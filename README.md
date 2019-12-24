@@ -31,13 +31,13 @@ Before accessing the project you need to enter the app container
 ```
 docker-compose exec bash
 ```
-Generate a new key for your app
-```sh
-php artisan key:generate
-```
 Install composer dependencies
 ```
 composer install
+```
+Generate a new key for your app
+```sh
+php artisan key:generate
 ```
 Install npm dependencies using yarn
 ```
