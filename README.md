@@ -3,7 +3,7 @@
 
 ## Project
 
-This project contain the required configurations to get up and running with a Laravel/Vue inside Docker containers.
+This project contain the required configurations to get up and running with a Laravel/Vue app inside Docker containers.
 
 ## Prerequisites
 
@@ -11,9 +11,9 @@ Having Docker and Docker-compose on your machine.
 
 ## Prepare environement
 
-Clone the repository
+Clone the project repository
 ```sh
-git clone Organization_name/Repository#
+git clone git@github.com:cominityio/poject_name.git
 ```
 Create a new .env file similar to .env.example  
 Choose your databse name / user name / password (there will be share in all your containers)  
