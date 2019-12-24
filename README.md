@@ -38,6 +38,10 @@ Before accessing the project you need to enter the app container
 ```
 docker-compose exec app bash
 ```
+Install composer dependencies
+```
+composer install
+```
 Generate a new key for your app
 ```
 php artisan key:generate
