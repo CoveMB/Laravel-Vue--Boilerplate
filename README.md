@@ -43,7 +43,7 @@ Generate a new key for your app
 php artisan key:generate
 ```
 Once the key has been generated you will need to shut down and compose back up your containers to load the new environement variables  
-to do so run the following commands (notice that we don't need the --build flag since since we didn't change the dependencies)
+To do so run the following commands (notice that we don't need the --build flag since since we didn't change the dependencies)
 ```
 docker-compose down
 docker-compose up
