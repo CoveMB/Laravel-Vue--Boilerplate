@@ -12,10 +12,11 @@ Having Docker and Docker-compose on your machine.
 ## Prepare environement
 
 Clone the project repository
-```sh
+```
 git clone git@github.com:cominityio/poject_name.git
 ```
-Create a new .env file similar to .env.example  
+Create a new .env file similar to .env.example
+APP_KEY= should stay blank for now
 Choose your databse name / user name / password (there will be share in all your containers)  
 Add the following (notice that the host is referenced as db, it will be used by Docker to establish the connection)
 ```
@@ -39,8 +40,14 @@ Install composer dependencies
 composer install
 ```
 Generate a new key for your app
-```sh
+```
 php artisan key:generate
+```
+Once the key has been generated you will need to shut down and compose back up your containers to load the new environement variables
+to do so run the following commands (notice that we don't need the --build flag since since we didn't change the dependencies)
+```
+docker-compose down
+docker-compose up
 ```
 Then produce a mix manifest for Vue using Yarn
 ```
@@ -51,7 +58,9 @@ You can now run the watch command that will enable hot reloading
 yarn watch
 ```
 You can acces the project at http://localhost:8080  
+
 You can acces phpmyadmin at http://localhost:80  
+
 To shutdown the containers run
 ```
 docker-compose down
