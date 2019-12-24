@@ -63,6 +63,8 @@ docker system prune -a
 
 ## Debuging
 
+:warning: Either install new dependencies inside the app container or if you install from host rebuilt the containers :warning:  
+
 To enter in the app container run
 ```
 docker-compose exec bash
