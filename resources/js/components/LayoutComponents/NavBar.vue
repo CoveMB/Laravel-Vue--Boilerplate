@@ -1,12 +1,15 @@
 <template>
-  <nav class="navbar bg-white border-bottom navbar-light">
+  <nav>
+    <h2>
+      Navbar
+    </h2>
     <router-link
-      class="navbar-brand mr-auto"
+      class="nav-link"
       active-class="active"
-      :to="{name: 'firstcomponent'}"
+      :to="{name: 'welcomecomponent'}"
       exact
     >
-      FirstComponent
+      WelcomeComponentLink
     </router-link>
   </nav>
 </template>
@@ -15,3 +18,17 @@ export default {
 
 };
 </script>
+<style>
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 20px;
+  border-bottom: 1px solid #636b6f;
+}
+.nav-link {
+  text-decoration: none;
+  cursor: pointer;
+  color: #636b6f;
+}
+</style>

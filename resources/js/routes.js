@@ -1,9 +1,9 @@
 import VueRouter from 'vue-router';
 
 // Importing conponent for the router with lazyloading
-const FirstComponent = (resolve) => {
-  require.ensure(['./components/FirstComponent/FirstComponent.vue'], () => {
-    resolve(require('./components/FirstComponent/FirstComponent.vue'));
+const WelcomeComponent = (resolve) => {
+  require.ensure(['./components/WelcomeComponent/WelcomeComponent.vue'], () => {
+    resolve(require('./components/WelcomeComponent/WelcomeComponent.vue'));
   }, 'user');
 };
 
@@ -11,9 +11,9 @@ const FirstComponent = (resolve) => {
 const routes = [
   {
     path: '/',
-    component: FirstComponent,
-    name: 'firstcomponent',
-  }
+    component: WelcomeComponent,
+    name: 'welcomecomponent',
+  },
 ];
 
 const router = new VueRouter({
