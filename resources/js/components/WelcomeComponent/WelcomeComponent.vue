@@ -48,12 +48,16 @@ body {
 }
 
 .content {
-    margin-top: 120px;
+    margin-top: 160px;
     text-align: center;
 }
 
 .title {
     font-size: 84px;
+}
+
+.links{
+  margin-top: 20px;
 }
 
 .links>a {
