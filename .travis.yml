@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+    - docker build -t cominity/laravel-test -f Dockerfile.dev .
+
+- before_script:
+    - travis_retry composer self-update
+    - travis_retry composer install --ignore-platform-reqs --no-interaction --prefer-source
+
+script:
+  - docker run cominity/laravel-test ./vendor/bin/phpunit
+
+after_success:
+  - docker build -t cominity

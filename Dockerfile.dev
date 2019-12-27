@@ -49,10 +49,11 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Install npm dependencies
-COPY package.json package-lock.json* yarn.lock* ./
+COPY --chown=www:www package.json package-lock.json* yarn.lock* ./
 RUN yarn install && yarn cache clean
 
 # Copy existing application directory permissions
+RUN chown -R www:www /var/www
 COPY --chown=www:www . /var/www
 
 # Change current user to www
