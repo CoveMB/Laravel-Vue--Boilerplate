@@ -4,6 +4,9 @@
 // Variables
 @import "variables";
 
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
 // Internal Stylsheets
 @import 'first-component/_first-component';
 @import 'shared/_flash';
