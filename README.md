@@ -18,14 +18,19 @@ git clone git@github.com:cominityio/poject_name.git
 OPTIONAL: If you are cloning the repo from the boilerplate don't forget to remove the .git history
 ```
 rm -rf .git
+git init
 ```
 Create a new .env file similar to .env.example  
-APP_KEY= should stay blank for now  
+APP_KEY= should stay blank for now
+
 Choose your databse name / user name / password (there will be share in all your containers)  
 Add the following (notice that the host is referenced as db, it will be used by Docker to establish the connection)
 ```
 DB_CONNECTION=mysql
+# Developing with docker
 DB_HOST=db
+# Developing without docker
+DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=your_db_name
 DB_USERNAME=your_db_user
