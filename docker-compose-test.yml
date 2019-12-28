@@ -64,8 +64,3 @@ services:
 networks:
   containers_net:
     driver: bridge
-
-#Volumes
-volumes:
-  dbdata:
-    driver: local
