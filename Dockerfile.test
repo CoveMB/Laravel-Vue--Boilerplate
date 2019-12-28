@@ -52,6 +52,20 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 RUN chown -R www:www /var/www
 COPY --chown=www:www . /var/www
 
+# Install composer dependencies for testing
+RUN composer self-update
+RUN composer install --ignore-platform-reqs --no-interaction --prefer-dist --no-suggest
+
+# Clear config cache
+RUN composer clear:cache
+
+# Migrate
+RUN php artisan migrate --seed
+
+# Install npm dependencies for testing
+RUN yarn --ignore-engines --pure-lockfile
+RUN yarn production
+
 # Change current user to www
 USER www
 

@@ -15,8 +15,12 @@ Clone the project repository
 ```
 git clone git@github.com:cominityio/poject_name.git
 ```
-Create a new .env file similar to .env.example
-APP_KEY= should stay blank for now
+OPTIONAL: If you are cloning the repo from the boilerplate don't forget to remove the .git history
+```
+rm -rf .git
+```
+Create a new .env file similar to .env.example  
+APP_KEY= should stay blank for now  
 Choose your databse name / user name / password (there will be share in all your containers)  
 Add the following (notice that the host is referenced as db, it will be used by Docker to establish the connection)
 ```
@@ -47,6 +51,7 @@ Generate a new key for your app
 php artisan key:generate
 ```
 Once the key has been generated you will need to shut down and compose back up your containers to load the new environement variables  
+
 To do so, run the following commands (notice that we don't need the --build flag since since we didn't change the dependencies)
 ```
 docker-compose down
@@ -92,4 +97,8 @@ sudo /etc/init.d/apache2 stop
 If you are missing privileges you can run
 ```
 sudo chown -R $USER:$USER ~/path/to/project
+```
+If you are having trouble deleting the node_modules repository run from your host
+```
+sudo rm -rf node_modules
 ```

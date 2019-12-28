@@ -49,6 +49,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "test": "\"vendor/bin/phpunit\"",
+        "clear:cache": "php artisan route:clear && php artisan config:clear && php artisan cache:clear",
+        "key:generate": "php artisan key:generate && php artisan key:generate --env=testing",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

@@ -5,7 +5,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.test
     image: cominity/laravel
     container_name: laravel
     depends_on:
@@ -14,16 +14,12 @@ services:
     restart: unless-stopped
     tty: true
     env_file: .env
-    environment:
-      - CHOKIDAR_USEPOLLING=true
     working_dir: /var/www
     volumes:
-      - /var/www/node_modules
+      - /var/www/vendor/
+      - /var/www/node_modules/
       - ./:/var/www
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
-    ports:
-      - "3000:3000"
-      - "3001:3001"
     networks:
       - containers_net
 
@@ -46,6 +42,7 @@ services:
   db:
     image: mysql:5.7
     container_name: mysql
+    command: --init-file /data/application/init.sql
     restart: unless-stopped
     tty: true
     ports:
@@ -58,24 +55,8 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - dbdata:/var/lib/mysql
+      - ./mysql/init.sql:/data/application/init.sql
       - ./mysql/my.cnf:/etc/mysql/my.cnf
-    networks:
-      - containers_net
-
-  #PhpMyAdmin
-  phpmyadmin:
-    depends_on:
-      - db
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    restart: always
-    ports:
-      - '8080:80'
-    environment:
-      MYSQL_USER: "${DB_USERNAME}"
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
-      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
     networks:
       - containers_net
 

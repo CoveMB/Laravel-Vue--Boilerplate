@@ -1,0 +1,19 @@
+image: pwbdod/docker-compose-aws-tf:latest
+
+options:
+  docker: true
+
+pipelines:
+  default:
+    - step:
+        script:
+          - cp .env.testing .env
+          - export DOCKER_COMPOSE_VERSION=1.12.0
+          - export DOCKER_COMPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)
+          - curl -L $DOCKER_COMPOSE_URL > docker-compose
+          - chmod +x docker-compose
+          - mv docker-compose /usr/local/bin
+          - docker-compose -f docker-compose-test.yml run -T app php artisan migrate
+          - docker-compose -f docker-compose-test.yml run -T app composer test
+        services:
+          - docker
