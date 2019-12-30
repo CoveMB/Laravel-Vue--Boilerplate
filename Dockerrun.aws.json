@@ -1,0 +1,14 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "bjmrqcominity/docker-test-phase2-master"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "9000"
+    }
+  ],
+  "Volumes": [],
+  "Logging": "/var/log",
+  "Command": "php-fpm --allow-to-run-as-root"
+}
