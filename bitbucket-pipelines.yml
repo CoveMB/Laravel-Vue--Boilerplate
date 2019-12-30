@@ -3,17 +3,66 @@ image: pwbdod/docker-compose-aws-tf:latest
 options:
   docker: true
 
-pipelines:
-  default:
-    - step:
+definitions:
+  test: &test
+    name: Build, Test & Push to DH
+    script:
+      - cp .env.testing .env
+      - docker-compose -f docker-compose-test.yml run -T app php artisan migrate
+      - docker-compose -f docker-compose-test.yml run -T app composer test
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+      - docker push cominityteam/$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH
+
+  push: &push
+    name: Push
+    script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdi
+      - docker push cominityteam/$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH
+    artifacts:
+      - tmp-image.docker
+    services:
+      - docker
+    caches:
+      - docker
+
+  deployProd: &deployProd
+    name: Deployement
+    deployment: Production
+      script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.0
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            AWS_DEFAULT_REGION: "us-east-1"
+            APPLICATION_NAME: "application-test"
+            ENVIRONMENT_NAME: 'production'
+            ZIP_FILE: "application.zip"
+
+    deployProd: &deployDev
+      name: Deployement
+      deployment: Dev
         script:
-          - cp .env.testing .env
-          - export DOCKER_COMPOSE_VERSION=1.12.0
-          - export DOCKER_COMPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)
-          - curl -L $DOCKER_COMPOSE_URL > docker-compose
-          - chmod +x docker-compose
-          - mv docker-compose /usr/local/bin
-          - docker-compose -f docker-compose-test.yml run -T app php artisan migrate
-          - docker-compose -f docker-compose-test.yml run -T app composer test
-        services:
-          - docker
+          - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.0
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: "us-east-1"
+              APPLICATION_NAME: "application-test"
+              ENVIRONMENT_NAME: 'production'
+              ZIP_FILE: "application.zip"
+
+pipelines:
+  branches:
+    master:
+      - step: *test
+      - step: *push
+
+    prod:
+      - step: *test
+      - step: *push
+      - step: *deployProd
+
+    dev:
+      - step: *test
+      - step: *push
+      - step: *deployDev

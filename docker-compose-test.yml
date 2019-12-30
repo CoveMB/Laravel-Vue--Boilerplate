@@ -5,8 +5,8 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.test
-    image: cominity/laravel
+      dockerfile: Dockerfile
+    image: cominityteam/${BITBUCKET_REPO_SLUG}-${BITBUCKET_BRANCH}
     container_name: laravel
     depends_on:
       - webserver
