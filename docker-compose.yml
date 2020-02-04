@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     image: cominity/laravel
-    container_name: laravel
+    container_name: laravel-${APP_NAME}
     depends_on:
       - webserver
       - db
@@ -30,7 +30,7 @@ services:
   #Nginx Service
   webserver:
     image: nginx:alpine
-    container_name: nginx
+    container_name: nginx-${APP_NAME}
     restart: unless-stopped
     tty: true
     ports:
@@ -45,7 +45,7 @@ services:
   #MySQL Service
   db:
     image: mysql:5.7
-    container_name: mysql
+    container_name: mysql-${APP_NAME}
     restart: unless-stopped
     tty: true
     ports:
@@ -68,10 +68,12 @@ services:
     depends_on:
       - db
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    container_name: phpmyadmin-${APP_NAME}
     restart: always
     ports:
       - '8080:80'
+    volumes:
+      - ./phpmyadmin/phpmyadmin-misc.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
     environment:
       MYSQL_USER: "${DB_USERNAME}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
