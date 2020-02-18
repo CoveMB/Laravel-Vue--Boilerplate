@@ -9,7 +9,6 @@ services:
     image: cominityteam/${BITBUCKET_REPO_SLUG}-${BITBUCKET_BRANCH}
     container_name: laravel
     depends_on:
-      - webserver
       - db
     restart: unless-stopped
     tty: true
@@ -27,6 +26,8 @@ services:
   webserver:
     image: nginx:alpine
     container_name: nginx
+    depends_on:
+      - app
     restart: unless-stopped
     tty: true
     ports:

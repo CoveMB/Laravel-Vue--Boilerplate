@@ -7,9 +7,7 @@ import * as actions from './modules/actions';
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  state: {
-    value: '',
-  },
+  state: { value: '', },
   getters,
   mutations,
   actions,

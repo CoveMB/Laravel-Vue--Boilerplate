@@ -9,7 +9,6 @@ services:
     image: cominity/laravel
     container_name: laravel-${APP_NAME}
     depends_on:
-      - webserver
       - db
     restart: unless-stopped
     tty: true
@@ -31,6 +30,8 @@ services:
   webserver:
     image: nginx:alpine
     container_name: nginx-${APP_NAME}
+    depends_on:
+      - app
     restart: unless-stopped
     tty: true
     ports:
