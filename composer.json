@@ -17,6 +17,7 @@
     "require-dev": {
         "garygreen/pretty-routes": "^1.0",
         "barryvdh/laravel-debugbar": "^3.2",
+        "beyondcode/laravel-er-diagram-generator": "^1.4",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
