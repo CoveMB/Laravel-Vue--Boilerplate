@@ -36,7 +36,7 @@ module.exports = {
       "error",
       {
         "multiline": true,
-        "minProperties": 3
+        "minProperties": 2
       }
     ],
     "object-property-newline": "error",
@@ -50,14 +50,14 @@ module.exports = {
       "error",
       {
         "multiline": true,
-        "minItems": 5
+        "minItems": 3
       }
     ],
     "array-element-newline": [
       "error",
       {
         "multiline": true,
-        "minItems": 5
+        "minItems": 3
       }
     ]
   },
