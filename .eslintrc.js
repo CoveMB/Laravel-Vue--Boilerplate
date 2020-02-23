@@ -1,7 +1,7 @@
 module.exports = {
 
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 10,
     parser: "babel-eslint"
   },
   extends: [
@@ -13,6 +13,7 @@ module.exports = {
     'eslint-plugin'
   ],
   rules: {
+    "max-len": [1, { "ignoreStrings": true, "ignoreUrls": true, "ignoreComments": true, "ignoreTemplateLiterals": true }],
     "padded-blocks": "error",
     "no-console": "off",
     "comma-dangle": "off",
