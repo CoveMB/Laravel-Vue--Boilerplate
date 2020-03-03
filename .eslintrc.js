@@ -6,63 +6,94 @@ module.exports = {
   },
   extends: [
     // "plugin:vue/recommended",
-    "@nuxtjs",
+    'plugin:vue/recommended',
     "airbnb/base"
   ],
   plugins: [
-    'eslint-plugin'
+    'eslint-plugin',
+    'vue'
   ],
   rules: {
-    "max-len": [1, { "ignoreStrings": true, "ignoreUrls": true, "ignoreComments": true, "ignoreTemplateLiterals": true }],
-    "padded-blocks": "error",
+    "max-len": [
+      "warn", 
+      { 
+        "code": 100,
+        "ignoreStrings": true, 
+        "ignoreUrls": true, 
+        "ignoreComments": true, 
+        "ignoreTemplateLiterals": true 
+      }],
+    "import/prefer-default-export": "off",
     "no-console": "off",
     "comma-dangle": "off",
-    "newline-before-return": "error",
-    "no-extra-semi": "error",
+    "padded-blocks": "warn",
+    "padding-line-between-statements": [
+      "warn",
+      { 
+        blankLine: "always", 
+        prev: "*", 
+        next: "return" 
+      },
+      { 
+        blankLine: "always", 
+        prev: ["const", "let", "var", "import"], 
+        next: "*"
+      },
+       { 
+         blankLine: "any", 
+         prev: ["const", "let", "var", "import"], 
+         next: ["const", "let", "var", "import"]
+        }
+    ],
     "quotes": [
-      "error",
+      "warn",
       "single"
     ],
-    "semi": "error",
+    // Semi and coma rules
+    "no-extra-semi": "warn",
+    "semi-style": ["error", "last"],
+    "semi": ['warn','always', {"omitLastInOneLineBlock": false} ],
     "indent": [
-      "error",
+      "warn",
       2
     ],
+    "comma-spacing": ["warn", { "before": false, "after": true }],
     // Object rules
     "object-curly-spacing": [
-      "error",
+      "warn",
       "always"
     ],
     "object-curly-newline": [
-      "error",
+      "warn",
       {
+        "ObjectPattern": { 
         "multiline": true,
-        "minProperties": 2
-      }
+        "minProperties": 2,
+      },
+      "ImportDeclaration": "never"
+    }
     ],
-    "object-property-newline": "error",
-    "import/prefer-default-export": "off",
     // Array rules
     "array-bracket-spacing": [
-      "error",
+      "warn",
       "always"
     ],
     "array-bracket-newline": [
-      "error",
+      "warn",
       {
         "multiline": true,
         "minItems": 3
       }
     ],
     "array-element-newline": [
-      "error",
+      "warn",
       {
         "multiline": true,
         "minItems": 3
       }
-    ]
+    ],
   },
-  env : {
-    "browser": true
+  env: {
+    browser: true,
   },
 }

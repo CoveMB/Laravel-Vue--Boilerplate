@@ -10,7 +10,7 @@ services:
     container_name: laravel-${APP_NAME}
     depends_on:
       - db
-    restart: unless-stopped
+    restart: on-failure
     tty: true
     env_file: .env
     environment:
@@ -33,7 +33,7 @@ services:
     container_name: nginx-${APP_NAME}
     depends_on:
       - app
-    restart: unless-stopped
+    restart: on-failure
     tty: true
     ports:
       - "80:80"
@@ -48,7 +48,7 @@ services:
   db:
     image: mysql:5.7
     container_name: mysql-${APP_NAME}
-    restart: unless-stopped
+    restart: on-failure
     tty: true
     ports:
       - "3306:3306"
@@ -71,7 +71,7 @@ services:
       - db
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin-${APP_NAME}
-    restart: always
+    restart: on-failure
     ports:
       - '8080:80'
     volumes:
