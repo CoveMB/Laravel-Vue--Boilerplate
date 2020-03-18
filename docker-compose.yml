@@ -1,6 +1,5 @@
-version: '3'
+version: "3"
 services:
-
   #Laravel App
   app:
     build:
@@ -9,6 +8,7 @@ services:
     image: cominity/laravel
     container_name: laravel-${APP_NAME}
     depends_on:
+      - webserver
       - db
     restart: on-failure
     tty: true
@@ -20,7 +20,7 @@ services:
     volumes:
       - /var/www/node_modules
       - ./:/var/www
-      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./ContainersConfig/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     ports:
       - "3000:3000"
       - "3001:3001"
@@ -31,8 +31,6 @@ services:
   webserver:
     image: nginx:alpine
     container_name: nginx-${APP_NAME}
-    depends_on:
-      - app
     restart: on-failure
     tty: true
     ports:
@@ -40,7 +38,7 @@ services:
       - "443:443"
     volumes:
       - ./:/var/www
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./ContainersConfig/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - containers_net
 
@@ -51,7 +49,7 @@ services:
     restart: on-failure
     tty: true
     ports:
-      - "3306:3306"
+      - "3360:3360"
     environment:
       MYSQL_DATABASE: "${DB_DATABASE}"
       MYSQL_USER: "${DB_USERNAME}"
@@ -61,7 +59,7 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - dbdata:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./ContainersConfig/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - containers_net
 
@@ -73,9 +71,9 @@ services:
     container_name: phpmyadmin-${APP_NAME}
     restart: on-failure
     ports:
-      - '8080:80'
+      - "8080:80"
     volumes:
-      - ./phpmyadmin/phpmyadmin-misc.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
+      - ./ContainersConfig/phpmyadmin/phpmyadmin-misc.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
     environment:
       MYSQL_USER: "${DB_USERNAME}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"

@@ -1,6 +1,5 @@
-version: '3'
+version: "3"
 services:
-
   #Laravel App
   app:
     build:
@@ -9,6 +8,7 @@ services:
     image: cominityteam/${BITBUCKET_REPO_SLUG}-${BITBUCKET_BRANCH}
     container_name: laravel
     depends_on:
+      - webserver
       - db
     restart: unless-stopped
     tty: true
@@ -18,7 +18,7 @@ services:
       - /var/www/vendor/
       - /var/www/node_modules/
       - ./:/var/www
-      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./ContainersConfig/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - containers_net
 
@@ -26,8 +26,6 @@ services:
   webserver:
     image: nginx:alpine
     container_name: nginx
-    depends_on:
-      - app
     restart: unless-stopped
     tty: true
     ports:
@@ -35,7 +33,7 @@ services:
       - "443:443"
     volumes:
       - ./:/var/www
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./ContainersConfig/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - containers_net
 
@@ -56,8 +54,8 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - ./mysql/init.sql:/data/application/init.sql
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./ContainersConfig/mysql/init.sql:/data/application/init.sql
+      - ./ContainersConfig/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - containers_net
 

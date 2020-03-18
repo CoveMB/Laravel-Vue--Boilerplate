@@ -1,8 +1,4 @@
-FROM bjmrq/laravel:latest
-
-# Install Xdebug
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+FROM bjmrq/laravel:php-7.4
 
 # Add user for laravel application
 RUN groupadd -g 1000 www
