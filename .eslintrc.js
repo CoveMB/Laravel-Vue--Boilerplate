@@ -23,10 +23,15 @@ module.exports = {
         "ignoreComments": true, 
         "ignoreTemplateLiterals": true 
       }],
+      "newline-per-chained-call": ['warn', { "ignoreChainWithDepth": 2 }],
     "import/prefer-default-export": "off",
     "no-console": "off",
     "comma-dangle": "off",
-    "padded-blocks": "warn",
+    "padded-blocks": [
+      "warn", 
+      'always', 
+      { "switches": "never" }
+    ],
     "padding-line-between-statements": [
       "warn",
       { 
