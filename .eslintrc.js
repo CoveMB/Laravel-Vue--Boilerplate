@@ -55,17 +55,17 @@ module.exports = {
     ],
     "padded-blocks": [
       "warn",
-      "always",
-      {
-        "switches": "never"
-      }
+      "always"
     ],
     "padding-line-between-statements": [
       "warn",
       {
         "blankLine": "always",
         "prev": "*",
-        "next": "return"
+        "next": [
+          "return",
+          "if"
+        ]
       },
       {
         "blankLine": "always",
