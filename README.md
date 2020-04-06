@@ -71,9 +71,9 @@ You can now run the watch command that will enable hot reloading
 ```
 yarn watch
 ```
-You can now acces the project at http://localhost:8080  
+You can now acces the project at http://localhost:80
 
-You can also acces phpmyadmin at http://localhost:80  
+You can also acces phpmyadmin at http://localhost:8080 
 
 To shutdown the containers run
 ```
