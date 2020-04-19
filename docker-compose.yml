@@ -1,15 +1,15 @@
-version: "3"
+version: "2.4"
 services:
   #Laravel App
   app:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    container_name: app-${APP_NAME}
     image: cominity/laravel
     depends_on:
-      - webserver
-      - db
-    restart: on-failure
+      db:
+        condition: service_healthy
     tty: true
     env_file: .env
     environment:
@@ -18,7 +18,7 @@ services:
     working_dir: /var/www
     volumes:
       - /var/www/node_modules
-      - ./:/var/www
+      - ./:/var/www:delegated
       - ./ContainersConfig/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     ports:
       - "3000:3000"
@@ -27,20 +27,26 @@ services:
   #Nginx Service
   webserver:
     image: nginx:alpine
-    restart: on-failure
+    container_name: webserver-${APP_NAME}
+    depends_on:
+      - app
     tty: true
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./:/var/www
+      - ./:/var/www:delegated
       - ./ContainersConfig/nginx/conf.d/:/etc/nginx/conf.d/
+      # Uncomment for debugging
+      # - ./ContainersConfig/nginx/logs/:/var/log/nginx/
 
   #MySQL Service
   db:
     image: mysql:5.7
-    restart: on-failure
+    container_name: db-${APP_NAME}
     tty: true
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1
     ports:
       - "3360:3360"
     environment:
@@ -53,15 +59,14 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
       - ./ContainersConfig/mysql/my.cnf:/etc/mysql/my.cnf
-    networks:
-      - containers_net
 
   #PhpMyAdmin
   phpmyadmin:
-    depends_on:
-      - db
     image: phpmyadmin/phpmyadmin
-    restart: on-failure
+    container_name: phpmyadmin-${APP_NAME}
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "8080:80"
     volumes:
