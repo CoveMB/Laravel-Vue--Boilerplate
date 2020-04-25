@@ -1,0 +1,53 @@
+image: pwbdod/docker-compose-aws-tf:latest
+
+options:
+  docker: true
+
+definitions:
+  test: &test
+    name: Build, Test & Push to DH
+    script:
+      - cp .env.testing .env
+      # - docker-compose -f docker-compose-test.yml run -T app php artisan migrate
+      - docker-compose -f docker-compose-test.yml run -T app composer test
+      # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+      # - docker push cominityteam/$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH
+
+  deployDev: &deployDev
+    name: Deployment
+    deployment: Dev
+    script:
+      - curl -X GET https://forge.laravel.com/servers/$SERVER_ID/sites/$SITE_ID/deploy/http?token=$DEPLOY_TOKEN
+
+  deployBeta: &deployBeta
+    name: Deployment
+    deployment: Beta
+    script:
+      - curl -X GET https://forge.laravel.com/servers/$SERVER_ID/sites/$SITE_ID/deploy/http?token=$DEPLOY_TOKEN
+
+  deployProd: &deployProd
+    name: Deployment
+    deployment: Prod
+    script:
+      - wget -q --spider https://forge.laravel.com/servers/$SERVER_ID/sites/$SITE_ID/deploy/http?token=$DEPLOY_TOKEN
+
+
+  services:
+    docker:
+      memory: 3048
+
+
+pipelines:
+  branches:
+
+    beta:
+      - step: *test
+      - step: *deployBeta
+
+    prod:
+      - step: *test
+      - step: *deployProd
+
+    dev:
+      - step: *test
+      - step: *deployDev
